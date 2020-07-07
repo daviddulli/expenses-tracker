@@ -1,6 +1,7 @@
 package org.fasttrackit.expensestracker.web;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fasttrackit.expensestracker.domain.Transaction;
 import org.fasttrackit.expensestracker.service.TransactionService;
 import org.fasttrackit.expensestracker.transfer.SaveTransactionRequest;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -35,6 +37,14 @@ public class TransactionController {
     public ResponseEntity<Transaction> getTransaction(@PathVariable long id){
         Transaction transaction = transactionService.getTransaction(id);
         return new ResponseEntity<>(transaction, HttpStatus.OK);
+    }
+
+
+
+    @GetMapping
+    public ResponseEntity<List<Transaction>> getTransactions(){
+        List<Transaction> transactions = transactionService.getTransactions();
+        return new ResponseEntity<>(transactions, HttpStatus.OK);
     }
 
 

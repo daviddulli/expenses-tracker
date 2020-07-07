@@ -85,7 +85,6 @@ public class TransactionServiceIntegrationTest {
         assertThat(response.getDescription(), is(transaction.getDescription()));
         assertThat(response.getDate(), is(transaction.getDate()));
         assertThat(response.getTransactionType(), is(transaction.getTransactionType()));
-
     }
 
     @Test

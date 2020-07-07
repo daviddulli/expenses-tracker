@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,18 +42,11 @@ public class TransactionService {
 
     }
 
-    public Page<Transaction> getTransactions(GetTransactionRequest request, Pageable pageable) {
-        LOGGER.info("Searching transactions {}", request);
 
-        if(request != null){
-            if (request.getTransactionType() != null){
-                return transactionRepository.findByTransactionTypeIs(request.getTransactionType(), pageable);
-            }else if(request.getMinValue() != null){
-                return transactionRepository.findByValueGreaterThanEqual(request.getMinValue(), pageable);
-            }else if (request.getMonthValue() != null && request.getMonthValue() >= 1 && request.getMonthValue() <= 12)
-                return transactionRepository.findByDate_MonthValue(request.getMonthValue(), pageable);
-        }
-        return transactionRepository.findAll(pageable);
+    public List<Transaction> getTransactions(){
+        LOGGER.info("Retrieving all transactions...");
+        return transactionRepository.findAll();
+
     }
 
     public Transaction getTransaction(long id){
